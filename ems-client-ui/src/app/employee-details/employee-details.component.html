@@ -1,0 +1,60 @@
+<h2>Employee Details</h2>
+<hr />
+<div *ngIf="employee">
+  <div class="form-group form-inline">
+    <div class="control-label col-md-4">
+      <label><b>First Name: </b> {{employee.firstName}}</label>
+    </div>
+    <div class="control-label col-md-4">
+      <label><b>Last Name: </b> {{employee.lastName}}</label>
+    </div>
+    <div class="control-label col-md-4">
+      <label><b>Email Id: </b> {{employee.emailId}}</label>
+    </div>
+  </div>
+</div>
+<div>
+  <h3>Search</h3>
+</div>
+<form class="form-group form-inline" >
+  <label class="control-label col-md-1" for="year">Year</label>
+  <input type="text" id="year" [(ngModel)]="filterYear" (ngModelChange)="reloadData(employee.empId)" name="year">
+  <div class="control-label col-md-4">
+    <label><h5>Total amount: {{totalSalary}}</h5> </label>
+  </div>
+</form>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>History of Salary Payment</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Payment Id</th>
+          <th>Date of Payment</th>
+          <th>Month of Payment</th>
+          <th>Year of Paymnent</th>
+          <th>Salary</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pay of payments">
+          <td>{{pay.payId}}</td>
+          <td>{{pay.dayOfPayment}}</td>
+          <td>{{pay.monthOfPayment}}</td>
+          <td>{{pay.yearOfPayment}}</td>
+          <td>{{pay.amount}}</td>
+          <td><button (click)="deletePayment(pay)" class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Back to Employee List</button><br>
